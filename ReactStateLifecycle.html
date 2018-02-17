@@ -41,8 +41,33 @@
         }
     }
 
+    function activateLasers() {
+        alert("Firing Lasers!");       
+    }
+
+    function ActionLink() {
+      function handleClick(e) {
+        e.preventDefault();
+        console.log('The link was clicked.');
+      }
+
+      return (
+        <a href="#" onClick={handleClick}>
+          Click me
+        </a>
+      );
+    }
+
     function tick() {
-        ReactDOM.render(<div><Clock /><Clock/><Clock/></div>, document.getElementById('root'));
+        ReactDOM.render(
+                <div>
+                    <button onClick={activateLasers}>
+                        Activate Lasers
+                    </button>
+                    <Clock />
+                    <Clock/>
+                    <Clock/>
+                </div>, document.getElementById('root'));
     }
 
     setInterval(tick, 1000);
