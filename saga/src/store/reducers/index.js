@@ -37,13 +37,13 @@ export function rootReducer(state = initialState, action) {
                 fetching: true,
                 error: null,
             };
-            break;
         
         case FETCH_DOG_SUCCESS:
             console.log("Redux: FETCH_DOG_SUCCESS");
             return {
                 ...state,
                 fetching: false,
+                dog: action.dog,
                 error: null,
             };
 
