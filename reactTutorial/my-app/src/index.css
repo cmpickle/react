@@ -52,3 +52,7 @@ body {
   .board-row:after {
     display: none;
   }
+
+  .bold {
+    font-weight: bold;
+  }
