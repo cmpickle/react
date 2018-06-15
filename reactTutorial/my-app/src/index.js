@@ -4,7 +4,7 @@ import './index.css';
 
 function Square(props) {
   return (
-    <button className="square" onClick={props.onClick} >
+    <button className="square {this.props.classWin}" onClick={props.onClick} >
       {props.value}
     </button>
   );
@@ -18,7 +18,7 @@ class Board extends React.Component {
       onClick={
         () => this.props.onClick(i)
       }
-      style={winnerSquares && console.log("i: " + i + " winner? " + winnerSquares.includes(i)) && winnerSquares.includes(i) ? "background-color: gold" : null} />;
+      classWin={winnerSquares && console.log("i: " + i + " winner? " + winnerSquares.includes(i)) && winnerSquares.includes(i) ? "win" : null} />;
   }
 
   createBoard = (winnerSquares) => {
