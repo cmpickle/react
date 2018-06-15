@@ -49,6 +49,6 @@ body {
     margin-left: 20px;
   }
   
-  ::after {
-
+  .board-row:after {
+    display: none;
   }
