@@ -19,25 +19,56 @@ class Board extends React.Component {
               } />;
   }
 
+  createBoard = () => {
+    const BOARD_SIZE = 3;
+    let gameBoard = [];
+    for (let i = 0; i < BOARD_SIZE; i++) {
+      let children = [];
+        for (let j = 0; j < BOARD_SIZE; j++) {
+        children.push(
+                      <span>
+                        {this.renderSquare(i * 3 + j)}
+                      </span>
+                      );
+        }
+      gameBoard.push(<div className="board-row"><div>{children}</div></div>);
+    }
+    return gameBoard;
+  }
+
   render() {
     return (
-      <div>
-        <div className="board-row">
-          {this.renderSquare(0)}
-          {this.renderSquare(1)}
-          {this.renderSquare(2)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(3)}
-          {this.renderSquare(4)}
-          {this.renderSquare(5)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(6)}
-          {this.renderSquare(7)}
-          {this.renderSquare(8)}
-        </div>
-      </div>
+      <table>
+        {this.createBoard()}
+      </table>
+      // <div>
+      //   {gameBoard.map((e, i) => {
+      //     console.log("e: " + e + " i: " + i);
+      //     return (
+      //       <div key={i} className="board-row">
+      //         {this.renderSquare(i)}
+      //         {this.renderSquare(i+1)}
+      //         {this.renderSquare(i+2)}
+      //       </div>
+      //     )
+      //   })}
+      // </div>
+      //   <div className="board-row">
+      //     {this.renderSquare(0)}
+      //     {this.renderSquare(1)}
+      //     {this.renderSquare(2)}
+      //   </div>
+      //   <div className="board-row">
+      //     {this.renderSquare(3)}
+      //     {this.renderSquare(4)}
+      //     {this.renderSquare(5)}
+      //   </div>
+      //   <div className="board-row">
+      //     {this.renderSquare(6)}
+      //     {this.renderSquare(7)}
+      //     {this.renderSquare(8)}
+      //   </div>
+      // </div>
     );
   }
 }
