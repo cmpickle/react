@@ -36,39 +36,7 @@ class Board extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        {this.createBoard()}
-      </div>
-      // <div>
-      //   {gameBoard.map((e, i) => {
-      //     console.log("e: " + e + " i: " + i);
-      //     return (
-      //       <div key={i} className="board-row">
-      //         {this.renderSquare(i)}
-      //         {this.renderSquare(i+1)}
-      //         {this.renderSquare(i+2)}
-      //       </div>
-      //     )
-      //   })}
-      // </div>
-      //   <div className="board-row">
-      //     {this.renderSquare(0)}
-      //     {this.renderSquare(1)}
-      //     {this.renderSquare(2)}
-      //   </div>
-      //   <div className="board-row">
-      //     {this.renderSquare(3)}
-      //     {this.renderSquare(4)}
-      //     {this.renderSquare(5)}
-      //   </div>
-      //   <div className="board-row">
-      //     {this.renderSquare(6)}
-      //     {this.renderSquare(7)}
-      //     {this.renderSquare(8)}
-      //   </div>
-      // </div>
-    );
+    return this.createBoard();
   }
 }
 
@@ -78,6 +46,7 @@ class Game extends React.Component {
     this.state = {
       history: [{
         squares: Array(9).fill(null),
+        place: null,
       }],
       stepNumber: 0,
       xIsNext: true,
@@ -88,6 +57,9 @@ class Game extends React.Component {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
     const squares = current.squares.slice();
+    const place = current.place;
+    const col = i%3;
+    const row = Math.floor(i/3);
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
@@ -95,6 +67,7 @@ class Game extends React.Component {
     this.setState({
       history: history.concat([{
         squares: squares,
+        place: {col:col, row:row},
       }]),
       stepNumber: history.length,
       xIsNext: !this.state.xIsNext
@@ -112,10 +85,11 @@ class Game extends React.Component {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
+    const place = current.place;
 
     const moves = history.map((step, move) => {
       const desc = move ?
-        'Go to move #' + move :
+        'Go to move #' + move + " Player " + ((move%2 ? 'X - ' : 'O - ') + "row: " + history[move].place.row + " col:" + history[move].place.col):
         'Go to game start';
       return (
         <li key={move}>
